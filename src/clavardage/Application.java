@@ -15,7 +15,7 @@ public class Application {
 	private User me;
 	private Contacts friends;
 	private ChatServlet servlet;
-
+	private Database db;
 	
 	private static int serverport;
 	private static String serverip;
@@ -54,12 +54,15 @@ public class Application {
 	return null;
 	} 
 		 
-	public void Connexion() {
+	public boolean Connexion(String pseudo) {
+		boolean disponible=true;
 		try {
-			HttpURLConnection con = sendRequest("connexion", getMe().toString());
+			HttpURLConnection con = sendRequest("connexion", pseudo);
 		} catch (IOException e) {
 			e.printStackTrace();
-		}		
+		}
+		return disponible;
+
 	}
 
 	public void Deconnexion() {
@@ -70,12 +73,14 @@ public class Application {
 		}	
 	}
 	
-	public void ChangePseudo() {
+	public boolean ChangePseudo(String pseudo) {
+		boolean disponible=true;
 		try {
-			HttpURLConnection con = sendRequest("changepseudo", getMe().toString());
+			HttpURLConnection con = sendRequest("changepseudo", pseudo);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
+		return disponible;
 	}
 	
 	
@@ -107,6 +112,14 @@ public class Application {
 
 	public void setFriends(Contacts friends) {
 		this.friends = friends;
+	}
+
+	public Database getDb() {
+		return db;
+	}
+
+	public void setDb(Database db) {
+		this.db = db;
 	}
 
 

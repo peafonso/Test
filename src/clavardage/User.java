@@ -13,7 +13,6 @@ public class User {
 	private int id; 
 	
 	public User() {
-		//this.setIP(UDPListener.getCurrentIp().getHostAddress());
 		this.setPort(1234);
 	}
 	
