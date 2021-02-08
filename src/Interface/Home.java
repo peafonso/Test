@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -69,6 +71,7 @@ public class Home {
 	private static JEditorPane notifPane;
 	private static JList<String> usersconnected;
 	private TCPRunner tcpListen;
+	private static Timer timer;
 
 
 	/**
@@ -77,6 +80,7 @@ public class Home {
 	 */
 	public Home(Application app) {
 		setApp(app);
+		app.setFriends();
 		initialize();
 	}
 
@@ -209,7 +213,6 @@ public class Home {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				if (getUsertalking()==null){
 					// nothing to do
-					System.out.println("t nul ");
 				}
 				else {
 					String msg = textField.getText();
@@ -398,8 +401,12 @@ public class Home {
 	 * Mise à jour de la liste de contacts associée après les différentes connexions,
 	 *  déconnexions ou changement de pseudo
 	 */
-	public static void miseAJourContact() {
-		usersconnected.setListData(getApp().getFriends().getListPseudo());
+	public void miseAJourContact() {
+        long delay = 4000; 
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new FreshList(), 0, delay);
+		/*getApp().setFriends();
+		usersconnected.setListData(getApp().getFriends().getListPseudo());*/
 	}
 
 	/**
@@ -514,5 +521,15 @@ public class Home {
 
 	public static void setApp(Application app) {
 		Home.app = app;
+	}
+	
+	//---------------- class timer ------------------------//
+	public class FreshList extends TimerTask {
+
+	   @Override
+	   public void run() {
+		   getApp().setFriends();
+			usersconnected.setListData(getApp().getFriends().getListPseudo());
+	    }
 	}
 }

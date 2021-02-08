@@ -1,6 +1,9 @@
 package Interface;
 
 import clavardage.*;
+import servlet.ChatServlet;
+import servlet.Test;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -45,8 +48,7 @@ public class AppInterface {
 	 *
 	 */
 	public AppInterface() {
-		User u1= new User();
-		app= new Application(u1);
+		app=new Application(new User());
 		app.setDb(new Database(app));
 		initialize();
 	}

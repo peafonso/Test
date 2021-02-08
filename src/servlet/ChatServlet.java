@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import clavardage.Application;
+
 import clavardage.Contacts;
 import clavardage.User;
 /**
@@ -18,8 +18,7 @@ import clavardage.User;
  */
 @WebServlet("/ChatServlet")
 public class ChatServlet extends HttpServlet {
-	private Application app;
-	private Contacts usersconnected;
+	private Contacts usersconnected; //personnes connectés sur le server
 	private static final long serialVersionUID = 1L;
 
     /**
@@ -27,8 +26,7 @@ public class ChatServlet extends HttpServlet {
      */
     public ChatServlet() {
     	super();
-    	setApp(new Application(new User()));
-    	usersconnected= getApp().getFriends();
+    	usersconnected= new Contacts();
     }
     
     protected void doPost(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException
@@ -36,38 +34,31 @@ public class ChatServlet extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 		response.setContentType("text/html");
 
-		String mode=request.getParameter("mode");
-		String pseudo,port,ip;
+		String mode=request.getParameter("action");
+		String oldpseudo,pseudo,ip;
 		
 		switch (mode) {
-		case "test":
-			response.setContentType("text/html");
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter out=response.getWriter();
-			out.print("<html><body>");
-			out.print("<h3>Hello holaa</h3>");
-			out.print("</body></html>");
-			System.out.println("test opé");
-
-			break;
-			
 		case "connexion" :
 			pseudo = request.getParameter("pseudo");
-			ip = request.getParameter("ip");
-			port = request.getParameter("port");
-			//int intport = Integer.parseInt(port);
+			ip= request.getParameter("ip");
 			User user = new User(ip, 1234, pseudo);
-			usersconnected.addContact(user);
-			System.out.println("connected"+user.toString());
-
+			boolean loginOK= (!usersconnected.appartient(pseudo));
+			response.setHeader("disponible", Boolean.toString(loginOK));
+			if (loginOK) {
+				usersconnected.addContact(user);
+			}
+			
 			break;
 			
 		case "changepseudo":
+			oldpseudo= request.getParameter("oldpseudo");
 			pseudo = request.getParameter("pseudo");
-			boolean loginOK= usersconnected.appartient(pseudo);
-			response.setHeader("result", Boolean.toString(loginOK));
-			getApp().getMe().setPseudo(pseudo);
-			System.out.println("pseudo changed");
+			boolean disponible= (!usersconnected.appartient(pseudo));
+			response.setHeader("disponible", Boolean.toString(disponible));
+			if (disponible) {
+				usersconnected.getUserfromPseudo(oldpseudo).setPseudo(pseudo);
+				System.out.println("disponible" + pseudo);
+			}
 			
 			break;
 			
@@ -77,6 +68,10 @@ public class ChatServlet extends HttpServlet {
 			usersconnected.deleteContact(c);;
 			System.out.println("deconnected ");
 			
+			break;
+		
+		case "getcontacts":
+			response.setHeader("contacts", usersconnected.getList());
 			break;
 
 		}
@@ -93,14 +88,6 @@ public class ChatServlet extends HttpServlet {
 		
 	}
 
-	public Application getApp() {
-		return app;
-	}
-
-	public void setApp(Application app) {
-		this.app = app;
-	}
-	
 
     
 	//subscribe()to the server whenever they join

@@ -14,8 +14,9 @@ public class User {
 	
 	public User() {
 		this.setPort(1234);
+		this.setIP(Application.getCurrentIp().getHostAddress());
 	}
-	
+
 	public User(String address, int port, String pseudonym) {
 		this.setIP(address);
 		this.setPort(port);

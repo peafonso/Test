@@ -29,6 +29,15 @@ public class Contacts extends ArrayList<User>{
 		contacts.remove(e);
 	}
 	
+	public boolean appartient (User e) {
+		for (User user : contacts) {
+			if (user.equals(e)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean appartient (String pseudo) {
 		for (User user : contacts) {
 			if (user.getPseudo().equals(pseudo)) {
@@ -98,5 +107,12 @@ public class Contacts extends ArrayList<User>{
 	}
 	
 	
-
+	public String getList(){
+		String liste="";
+		for (User user : contacts) {
+			liste=user.toString();
+		}
+		return liste;
+	}
+	
 }

@@ -1,20 +1,25 @@
 package clavardage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.URL;
+import java.net.http.HttpResponse;
 import java.util.Enumeration;
 
+import Interface.Home;
 import servlet.ChatServlet;
 
 public class Application {
 	private User me;
 	private Contacts friends;
-	private ChatServlet servlet;
+	//private ChatServlet servlet;
 	private Database db;
 	
 	private static int serverport;
@@ -26,9 +31,7 @@ public class Application {
 	public Application(User u1) {
 		//on crée notre liste de contacts
 		this.setMe(u1);
-		setFriends(new Contacts());
-		
-		serverport=1234;
+		serverport=8080;
 		serverip=getCurrentIp().getHostAddress();
 	}
 	
@@ -57,7 +60,14 @@ public class Application {
 	public boolean Connexion(String pseudo) {
 		boolean disponible=true;
 		try {
-			HttpURLConnection con = sendRequest("connexion", pseudo);
+			HttpURLConnection con = sendRequest("connexion","pseudo="+pseudo+"&ip="+getMe().getIP());
+			String response= con.getHeaderField("disponible");
+			if (response.equals("true")) {
+				disponible=true;
+			}
+			else {
+				disponible=false;
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -67,20 +77,50 @@ public class Application {
 
 	public void Deconnexion() {
 		try {
-			HttpURLConnection con = sendRequest("deconnexion", getMe().toString());
+			HttpURLConnection con = sendRequest("deconnexion", "pseudo="+getMe().getPseudo());
+			
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}
+
 	}
 	
 	public boolean ChangePseudo(String pseudo) {
 		boolean disponible=true;
 		try {
-			HttpURLConnection con = sendRequest("changepseudo", pseudo);
+			HttpURLConnection con = sendRequest("changepseudo", "oldpseudo="+getMe().getPseudo()+"&pseudo="+pseudo);
+			String response= con.getHeaderField("disponible");
+			if (response.equals("true")) {
+				disponible=true;
+			}
+			else {
+				disponible=false;
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
-		}	
+		}
 		return disponible;
+	}
+	
+	public void setFriends() {
+		try {
+			HttpURLConnection con = sendRequest("getcontacts", "");
+			String liste= con.getHeaderField("contacts");
+			Contacts contacts= new Contacts();
+			String[] users=liste.split("/");
+			for (int i=0; i<users.length; i++) {
+				String[] pseudoandip= users[i].split("_");
+				User u=new User(pseudoandip[2],1234,pseudoandip[1]);
+				if(!(contacts.appartient(u))) {
+					contacts.addContact(u);
+					db.createTableConvo(pseudoandip[2]);
+				}
+			}
+			System.out.println("There is "+ contacts.length());
+			this.friends = contacts ;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -97,6 +137,7 @@ public class Application {
 		return con;
 	}
 	
+	
 
 	public User getMe() {
 		return me;
@@ -110,9 +151,6 @@ public class Application {
 		return friends;
 	}
 
-	public void setFriends(Contacts friends) {
-		this.friends = friends;
-	}
 
 	public Database getDb() {
 		return db;
