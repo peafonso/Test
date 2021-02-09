@@ -10,6 +10,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="sqlite-jdbc-3.7.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/perri/eclipse-workspace/apache-tomcat-9.0.41/apache-tomcat-9.0.41/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="servlet-api.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
