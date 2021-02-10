@@ -1,7 +1,6 @@
 package Interface;
 
 import clavardage.*;
-import servlet.ChatServlet;
 
 import java.awt.EventQueue;
 

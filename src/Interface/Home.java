@@ -399,14 +399,13 @@ public class Home {
 
 	/**
 	 * Mise à jour de la liste de contacts associée après les différentes connexions,
-	 *  déconnexions ou changement de pseudo
+	 *  déconnexions ou changement de pseudo (on récupère auprès du serveur la liste des personnes
+	 *  connectés toutes les 4s)
 	 */
 	public void miseAJourContact() {
         long delay = 4000; 
         timer = new Timer();
         timer.scheduleAtFixedRate(new FreshList(), 0, delay);
-		/*getApp().setFriends();
-		usersconnected.setListData(getApp().getFriends().getListPseudo());*/
 	}
 
 	/**

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import clavardage.Contacts;
 import clavardage.User;
 /**
- * Servlet implementation class Hello
+ * Servlet implementation class 
  */
 @WebServlet("/ChatServlet")
 public class ChatServlet extends HttpServlet {
