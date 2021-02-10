@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
@@ -15,10 +14,11 @@ import clavardage.Contacts;
 import clavardage.User;
 /**
  * Servlet implementation class 
+ * usersconnected : liste des personnes connectés sur le serveur
  */
 @WebServlet("/ChatServlet")
 public class ChatServlet extends HttpServlet {
-	private Contacts usersconnected; //personnes connectés sur le server
+	private Contacts usersconnected; 
 	private static final long serialVersionUID = 1L;
 
     /**

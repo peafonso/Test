@@ -157,11 +157,11 @@ public class Database {
 		try (Connection conn =  this.connect() ; PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(2, msg.getTimeString());
 	        pstmt.setString(3, msg.getData());
-	        // 0 -> j'ai envoyï¿½ le message
+	        // 0 -> j'ai envoyé le message
 	        if (msg.getSender().equals(getApp().getMe())) {
 	        	pstmt.setInt(4, 0);
 	        }
-	        // 1 -> j'ai reï¿½u le message
+	        // 1 -> j'ai reçu le message
 	        else {
 	        	pstmt.setInt(4, 1);
 
