@@ -138,7 +138,7 @@ public class Application {
 			for (int i=0; i<users.length; i++) {
 				String[] pseudoandip= users[i].split("_");
 				User u=new User(pseudoandip[2],1234,pseudoandip[1]);
-				if(!(contacts.appartient(u))) {
+				if(!(contacts.appartient(pseudoandip[1]))) {
 					contacts.addContact(u);
 					db.createTableConvo(pseudoandip[2]);
 				}
