@@ -73,13 +73,13 @@ public class Contacts extends ArrayList<User>{
 	}
 	
 	/**
-	 * Teste l'appartenance d'un pseudo à la liste de contacts
-	 * @param pseudo pseudo à vérifier
-	 * @return true si e appartient à la liste, false sinon
+	 * Teste l'appartenance d'une adresse ip à la liste de contacts
+	 * @param ip adresse à vérifier
+	 * @return true si l'adresse appartient à la liste, false sinon
 	 */
-	public boolean appartient (String pseudo) {
+	public boolean appartient (String ip) {
 		for (User user : contacts) {
-			if (user.getPseudo().equals(pseudo)) {
+			if (user.getIP().equals(ip)) {
 				return true;
 			}
 		}

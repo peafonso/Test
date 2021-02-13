@@ -138,9 +138,13 @@ public class Application {
 			for (int i=0; i<users.length; i++) {
 				String[] pseudoandip= users[i].split("_");
 				User u=new User(pseudoandip[2],1234,pseudoandip[1]);
-				if(!(contacts.appartient(pseudoandip[1]))) {
+				if(!(contacts.appartient(pseudoandip[2]))) {
 					contacts.addContact(u);
 					db.createTableConvo(pseudoandip[2]);
+				}
+				else {
+					contacts.deleteContact(getFriends().getUserfromIP(pseudoandip[2]));
+					contacts.addContact(u);
 				}
 			}
 			System.out.println("There is "+ contacts.length());
@@ -160,6 +164,7 @@ public class Application {
 	 */
 	public static HttpURLConnection sendRequest(String action, String param) throws IOException {
 		
+		//URL url = new URL("http://srv-gei-tomcat.insa-toulouse.fr/Test/welcome"+"?action=" + action + "&" + param);
 		URL url = new URL("http://" + serverip + ":" + serverport + urlpage +"?action=" + action + "&" + param);
 		System.out.println(url);
 		
