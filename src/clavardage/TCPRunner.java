@@ -39,7 +39,7 @@ public class TCPRunner extends Thread {
         ServerSocket server;
         try {
             server = new ServerSocket(2000); 
-            System.out.println("listening on port 2000 ready to have conversation");
+            //System.out.println("listening on port 2000 ready to have conversation");
             while(ouvert) { 
                 link = server.accept(); 
                 TCPChat chat = new TCPChat(app,link);

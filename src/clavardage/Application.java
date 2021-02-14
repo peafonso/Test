@@ -17,7 +17,7 @@ import java.util.Enumeration;
  *  db : instance de la classe Database représentant la base de données de l'user (permettant la gestion
  *       de l'historique des conversations)
  *  
- *  serverport & serverip : attributs du serveur
+ *  serverport et serverip : attributs du serveur
  *  
  */
 
@@ -147,7 +147,6 @@ public class Application {
 					contacts.addContact(u);
 				}
 			}
-			System.out.println("There is "+ contacts.length());
 			this.friends = contacts ;
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -160,13 +159,13 @@ public class Application {
 	 * @param action action à effectuer (connexion, deconnexion, changepseudo ou getcontacts)
 	 * @param param paramètres utiles à l'actions
 	 * @return HttpURLConnection
-	 * @throws IOException
+	 * @throws IOException exception à lever 
 	 */
 	public static HttpURLConnection sendRequest(String action, String param) throws IOException {
 		
 		//URL url = new URL("http://srv-gei-tomcat.insa-toulouse.fr/Test/welcome"+"?action=" + action + "&" + param);
 		URL url = new URL("http://" + serverip + ":" + serverport + urlpage +"?action=" + action + "&" + param);
-		System.out.println(url);
+		//System.out.println(url);
 		
 		//envoi requete
 		HttpURLConnection con = (HttpURLConnection) url.openConnection();

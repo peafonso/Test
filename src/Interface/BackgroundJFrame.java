@@ -15,7 +15,7 @@ class BackgroundJFrame extends JFrame{
 
 	/**
 	 * Constructeur BackgroundJFrame 
-	 * > Mise en place du fond correspondant à la classe voulu
+	 * : Mise en place du fond correspondant à la classe voulu
 	 * @param name nom de la frame à décorer
 	 */
 	public BackgroundJFrame(String name){

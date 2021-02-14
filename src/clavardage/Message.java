@@ -60,7 +60,7 @@ public class Message implements Serializable {
 	/**
 	 * Retranscription d'un message d'après ces informations
 	 * @param smsg infos du message sous une chaine de caractères
-	 * @return
+	 * @return le message
 	 */
 	public static Message toMessage(String smsg) {
 		String[] paramsg=smsg.split("\n");

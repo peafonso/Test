@@ -53,7 +53,7 @@ public class Database {
 	   		if (conn != null) {
 	   			DatabaseMetaData meta = conn.getMetaData();
 	   			System.out.println("The driver name is " + meta.getDriverName());
-	   			System.out.println("A new database has been created.");
+	   			//System.out.println("A new database has been created.");
 	   		}
 
 	   	} catch (SQLException e) {	
@@ -82,7 +82,7 @@ public class Database {
 	 * id : numéros des messages (1 étant le plus ancien)
 	 * time : horodatage des message
 	 * message : textes envoyés par les participants de la conversation
-	 * sender : 0 -> on a envoyé le message 1 -> on a reçu le message
+	 * sender : 0 = on a envoyé le message 1 = on a reçu le message
      * 
      * (Si on lance createTableConvo avec un correspondant avec lequel on a déjà conversé on 
      * ne recrée pas une nouvelle table (IF NOT EXISTS))
@@ -166,7 +166,7 @@ public class Database {
 	        	pstmt.setInt(4, 1);
 
 	        }
-	    	System.out.println("on ajoute le msg");
+	    	//System.out.println("on ajoute le msg");
 
 	        pstmt.executeUpdate();
 	    } catch (SQLException e) {
@@ -194,7 +194,6 @@ public class Database {
 	public void deleteConvo(String ip2) {
 		String nomtable= getNomTable(ip2);
 		String sql = "DROP TABLE `"+nomtable+"`";
-		System.out.println("DROP TABLE `"+nomtable+"`");
 	        try (Connection conn = DriverManager.getConnection(url);
 	            PreparedStatement pstmt = conn.prepareStatement(sql)) {
 	            pstmt.executeUpdate();

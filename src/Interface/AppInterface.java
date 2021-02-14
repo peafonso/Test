@@ -54,6 +54,7 @@ public class AppInterface {
 	
 	/**
 	 * Lancement de la première fenêtre de connexion de l'application
+	 *
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

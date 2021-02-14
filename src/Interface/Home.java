@@ -235,11 +235,11 @@ public class Home {
 		textArea.setEditable(false);
 
 		JLabel lblTalkingwith = new JLabel("Talking with");
-		lblTalkingwith.setFont(new Font("Bahnschrift", Font.BOLD, 20));
+		lblTalkingwith.setFont(new Font("Bahnschrift", Font.BOLD, 18));
 		lblTalkingwith.setBounds(60, 57, 126, 31);
 		setTalkingto(new JTextArea());
 		getTalkingto().setBackground(new Color(211, 211, 211));
-		getTalkingto().setFont(new Font("Bahnschrift", Font.BOLD | Font.ITALIC, 20));
+		getTalkingto().setFont(new Font("Bahnschrift", Font.BOLD | Font.ITALIC, 18));
 		getTalkingto().setBounds(174, 60, 126, 25);
 		frame.getContentPane().setLayout(null);
 
@@ -360,7 +360,7 @@ public class Home {
 	 * @param u2 user en clavardage
 	 */
 	public void Chats(User u2) {
-		System.out.println("talking to" + u2.getPseudo());
+		//System.out.println("talking to" + u2.getPseudo());
 		getTalkingto().setText(u2.getPseudo()); // pour afficher à qui on parle
 	}
 	
@@ -420,9 +420,7 @@ public class Home {
 	 * @param friend pseudo de l'user qui nous envoie un message
 	 */
 	public static void display(String friend) {
-		System.out.println("receiving smthing from ");
 		if (getTalkingto().getText().equals(friend)) {
-			System.out.println("printing it");
 			loadconvo(usertalking);
 		}
 	}

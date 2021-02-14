@@ -109,7 +109,7 @@ public class DeleteConv extends JFrame {
 					app.getDb().createTableConvo(userToForget.getIP());
 			    	Home.getTalkingto().setText(userToForget.getPseudo()); //pour afficher à qui on parle
 					Home.loadconvo(userToForget);
-			    	System.out.println("Delete conv with"+ userTalk);
+			    	//System.out.println("Delete conv with"+ userTalk);
 					dispose(); //ferme la fenetre
 
 				}else{

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 /**
- * Classe Contacts héritant de ArrayList<User> représentant la liste des users connectés 
+ * Classe Contacts héritant de ArrayList représentant la liste des users connectés 
  * par l'attribut contacts 
  *
  */

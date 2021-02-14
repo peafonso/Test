@@ -79,7 +79,7 @@ public class TCPChat extends Thread{
         try {
         	data = (String) getIn().readObject();
         	msg = Message.toMessage(data);
-        	System.out.println("jai recu"+data);
+        	//System.out.println("jai recu"+data);
         }
         catch (ClassNotFoundException e) {
         	e.printStackTrace();

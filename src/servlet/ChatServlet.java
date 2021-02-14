@@ -57,7 +57,6 @@ public class ChatServlet extends HttpServlet {
 			response.setHeader("disponible", Boolean.toString(disponible));
 			if (disponible) {
 				usersconnected.getUserfromPseudo(oldpseudo).setPseudo(pseudo);
-				System.out.println("disponible" + pseudo);
 			}
 			
 			break;
@@ -66,7 +65,6 @@ public class ChatServlet extends HttpServlet {
 			pseudo = request.getParameter("pseudo");
 			User c = usersconnected.getUserfromPseudo(pseudo);
 			usersconnected.deleteContact(c);;
-			System.out.println("deconnected ");
 			
 			break;
 		
