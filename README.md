@@ -10,6 +10,8 @@ $ git clone https://github.com/peafonso/Test
 ```
 
 ### Utilisation
+
+Lancer le fichier Test.war sur un serveur. 
 ```
 $ java -cp ChitChatOutdoor.jar Interface.AppInterface
 ```
